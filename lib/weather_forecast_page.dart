@@ -32,18 +32,18 @@ class MapSampleState extends State<MapSample> {
   _initTiles(DateTime date) async {
     final String overlayId = date.millisecondsSinceEpoch.toString();
 
-    final TileOverlay tileOverlay = TileOverlay(
-      tileOverlayId: TileOverlayId(overlayId),
-      tileProvider: ForecastTileProvider(
-        dateTime: date,
-        mapType: 'PAR0',
-        // mapType: 'PR0',
-        opacity: 1,
-      ),
-    );
-    setState(() {
-      _tileOverlay = tileOverlay;
-    });
+    // final TileOverlay tileOverlay = TileOverlay(
+    //   tileOverlayId: TileOverlayId(overlayId),
+    //   tileProvider: ForecastTileProvider(
+    //     dateTime: date,
+    //     mapType: 'PAR0',
+    //     // mapType: 'PR0',
+    //     opacity: 1,
+    //   ),
+    // );
+    // setState(() {
+    //   _tileOverlay = tileOverlay;
+    // });
   }
 
   static const CameraPosition _initialPosition = CameraPosition(
