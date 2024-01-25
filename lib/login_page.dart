@@ -1,5 +1,6 @@
 // lib/login_page.dart
 import 'package:flutter/material.dart';
+import 'dashboard_page.dart'; // Import your dashboard page file
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
+  // String username = "YourUsername";
+
   bool _isLoginForm = true; // Default to login form
 
   void _toggleForm() {
@@ -25,9 +28,23 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       // Validation successful, handle login or sign-up logic here
       if (_isLoginForm) {
-        // Handle login
-        print(
-            'Logging in with username: ${_usernameController.text}, password: ${_passwordController.text}');
+        if (_usernameController.text == 'hello' &&
+            _passwordController.text == 'world') {
+          // If login successful, navigate to dashboard
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    DashboardPage(username: _usernameController.text)),
+          );
+        } else {
+          // Handle incorrect login credentials
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Incorrect username or password'),
+            ),
+          );
+        }
       } else {
         // Handle sign-up
         print(
