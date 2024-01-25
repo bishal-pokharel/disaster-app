@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+forcast_tile_provider.dart
 migrate_working_dir/
 
 # IntelliJ related

@@ -1,13 +1,32 @@
-// lib/disaster_alert_page.dart
+// emergency_service_page.dart
 import 'package:flutter/material.dart';
+import 'full_screen_content_page.dart'; // Import the new full-screen content page
 
-class EmergencyServicePage extends StatelessWidget {
-  final List<String> notifications = [
-    'Fire And Rescue',
-    'Paramedics',
-    'Disaster Relief Force',
-    // Add more notifications as needed
-  ];
+class EmergencyServicePage extends StatefulWidget {
+  @override
+  _EmergencyServicePageState createState() => _EmergencyServicePageState();
+}
+
+class _EmergencyServicePageState extends State<EmergencyServicePage> {
+  final Map<String, Map<String, dynamic>> notificationContent = {
+    'Fire And Rescue': {
+      'heading': 'Fire And Rescue Heading',
+      'paragraph': 'Description for Fire And Rescue',
+      'list': ['Item 1', 'Item 2', 'Item 3'],
+    },
+    'Paramedics': {
+      'heading': 'Paramedics Heading',
+      'paragraph': 'Description for Paramedics',
+      'list': ['Item A', 'Item B', 'Item C'],
+    },
+    'Disaster Relief Force': {
+      'heading': 'Disaster Relief Force Heading',
+      'paragraph': 'Description for Disaster Relief Force',
+      'list': ['Item X', 'Item Y', 'Item Z'],
+    },
+    // Add more content as needed
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,18 +53,25 @@ class EmergencyServicePage extends StatelessWidget {
           // Notification Buttons
           Expanded(
             child: ListView.builder(
-              itemCount: notifications.length,
+              itemCount: notificationContent.length,
               itemBuilder: (context, index) {
+                final notification = notificationContent.keys.elementAt(index);
                 return Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 100),
                   child: MaterialButton(
                     onPressed: () {
-                      // Handle button press, you can show a notification dialog or navigate to a new page
-                      _showNotificationDialog(context, notifications[index]);
+                      // Navigate to the FullScreenContentPage with the selected notification
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FullScreenContentPage(
+                              content: notificationContent[notification]!),
+                        ),
+                      );
                     },
                     child: Text(
-                      notifications[index],
+                      notification,
                       style: TextStyle(fontSize: 12),
                     ),
                     color: Colors.grey,
@@ -57,27 +83,6 @@ class EmergencyServicePage extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  // Function to show a notification dialog
-  void _showNotificationDialog(BuildContext context, String message) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Notification'),
-          content: Text(message),
-          actions: [
-            FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
     );
   }
 }
